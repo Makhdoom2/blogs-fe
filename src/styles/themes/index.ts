@@ -1,7 +1,15 @@
-import { lightTheme } from "./light";
-import { darkTheme } from "./dark";
+import light from "./light";
+import dark from "./dark";
 
 export const themes = {
-  light: lightTheme,
-  dark: darkTheme,
+  light,
+  dark,
 };
+
+export type ThemeType = keyof typeof themes;
+
+export const getTheme = (mode: ThemeType) => {
+  return themes[mode];
+};
+
+export default themes;
