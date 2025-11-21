@@ -1,19 +1,23 @@
+/* Base styles for brandSide */
 .brandSide {
   flex: 1.1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  align-items: center; /* Ensure the content is horizontally centered */
   padding: 3rem;
-
-  background: var(--aurora-gradient);
   color: white;
-
   position: relative;
   overflow: hidden;
   max-width: 35%;
+  text-align: center; /* Center-align the content */
+  transition: all 0.3s ease-in-out; /* Smooth transition for resizing */
+  background: var(--aurora-gradient); /* Use your existing gradient color */
+  background-size: 400% 400%; /* Stretch the gradient */
+  animation: auroraAnimation 10s ease-in-out infinite; /* Animate the gradient */
 }
 
+/* Mobile and Tablet responsiveness */
 @media (max-width: 860px) {
   .brandSide {
     max-width: unset;
@@ -22,44 +26,69 @@
   }
 }
 
-/* Floating aurora glow */
-.brandSide::after {
-  content: "";
-  position: absolute;
-  width: 70%;
-  height: 70%;
-  top: 20%;
-  left: 10%;
-  background: var(--color-primary-glow);
-  filter: blur(80px);
-  opacity: 0.55;
-  animation: floatGlow 6s ease-in-out infinite alternate;
-}
-
-@keyframes floatGlow {
-  from {
-    transform: translateY(-20px);
-    opacity: 0.45;
+/* New Aurora Background Animation */
+@keyframes auroraAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-  to {
-    transform: translateY(20px);
-    opacity: 0.75;
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
+/* Title Styles */
 .title {
+  z-index: 100;
   font-size: 3rem;
   font-weight: 900;
   letter-spacing: -1px;
-
   background: white;
   -webkit-background-clip: text;
   color: transparent;
+  transition: font-size 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition for resizing */
+  margin: 0; /* Ensure no margins causing misalignment */
 }
 
+/* Subtitle Styles */
 .subtitle {
+  z-index: 100;
   font-size: 1.2rem;
+  font-weight: 400;
   opacity: 0.95;
   margin-top: 1rem;
   max-width: 380px;
+  transition: font-size 0.3s ease-in-out; /* Smooth transition for resizing */
+  animation: none; /* Stopped the floating animation */
+  margin-bottom: 0; /* Ensure no extra space below */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem; /* Slightly smaller title for mobile */
+    transform: scale(1.05); /* Slightly bigger title for emphasis */
+  }
+
+  .subtitle {
+    font-size: 1rem; /* Smaller subtitle for mobile */
+    max-width: 320px; /* Reduce the width of the subtitle text */
+    animation: none; /* Stopped the floating animation */
+  }
+}
+
+/* Extra Small Devices (Portrait mobile) */
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+    transform: scale(1.1);
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    max-width: 280px;
+    animation: none;
+  }
 }
