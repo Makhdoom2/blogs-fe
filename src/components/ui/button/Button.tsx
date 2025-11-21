@@ -3,11 +3,13 @@
 import styles from "./button.module.css";
 
 interface ButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary";
   size?: "sm" | "md" | "lg";
+  isWidthFull?: boolean;
+  isCenter?: boolean;
 }
 
 export default function Button({
@@ -16,10 +18,18 @@ export default function Button({
   type = "button",
   variant = "primary",
   size = "md",
+  isWidthFull = false,
+  isCenter = false,
 }: ButtonProps) {
   return (
     <button
-      className={`${styles.button} ${styles[variant]} ${styles[size]}`}
+      className={`
+        ${styles.button}
+        ${styles[variant]}
+        ${styles[size]}
+        ${isWidthFull ? styles.fullWidth : ""}
+        ${isCenter ? styles.center : ""}
+      `}
       onClick={onClick}
       type={type}
     >

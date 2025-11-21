@@ -81,3 +81,13 @@
     padding: 0.5rem 1.25rem;
   }
 }
+
+.fullWidth {
+  width: 100%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
