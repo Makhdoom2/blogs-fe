@@ -1,6 +1,3 @@
-/* ----------------------------- */
-/* RESET & BASE STYLES */
-/* ----------------------------- */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -38,11 +35,7 @@ button {
   transition: all 0.2s ease-in-out;
 }
 
-/* ----------------------------- */
-/* THEME VARIABLES */
-/* ----------------------------- */
 :root {
-  /* LIGHT THEME VARIABLES */
   --color-background: #f7f8fa;
   --color-card: #ffffff;
   --color-text: #121317;
@@ -50,9 +43,13 @@ button {
   --color-border: #e2e4e9;
 
   --color-primary: #6366f1;
+  --color-primary-dark: #5658d4;
+  --color-primary-darker: #4a4cb7;
   --color-primary-glow: rgba(99, 102, 241, 0.35);
   --color-secondary: #22d3ee;
+  --color-secondary-dark: #1da2c2;
 
+  --color-btn-text: #ffffff;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
@@ -65,12 +62,10 @@ button {
     #14b8a6 100%
   );
 
-  /* Shadows */
   --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.06);
   --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.1);
   --shadow-glow: 0 0 22px rgba(139, 92, 246, 0.25);
 
-  /* Border radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -78,7 +73,6 @@ button {
 }
 
 [data-theme="dark"] {
-  /* DARK THEME VARIABLES */
   --color-background: #0a0b0e;
   --color-card: #121317;
   --color-text: #f7f8fa;
@@ -86,9 +80,13 @@ button {
   --color-border: #2b2f3a;
 
   --color-primary: #8b5cf6;
+  --color-primary-dark: #7c4cf4;
+  --color-primary-darker: #6d3cf2;
   --color-primary-glow: rgba(139, 92, 246, 0.45);
   --color-secondary: #14b8a6;
+  --color-secondary-dark: #12958b;
 
+  --color-btn-text: #ffffff;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
@@ -111,11 +109,6 @@ button {
   --radius-pill: 100px;
 }
 
-/* ----------------------------- */
-/* COMPONENT STYLES */
-/* ----------------------------- */
-
-/* Cards */
 .card {
   background: var(--color-card);
   border: 1px solid var(--color-border);
@@ -125,19 +118,16 @@ button {
   transition: background 0.25s ease, border 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Glow utility */
 .glow {
   box-shadow: var(--shadow-glow);
 }
 
-/* Gradient text utility */
 .text-gradient {
   background: var(--aurora-gradient);
   -webkit-background-clip: text;
   color: transparent;
 }
 
-/* Buttons */
 .btn-primary {
   background: var(--color-primary);
   color: white;
@@ -152,9 +142,75 @@ button {
   box-shadow: 0 0 25px var(--color-primary-glow);
 }
 
-/* Optional: dark mode system preference */
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0.5rem 0;
+}
+
+h1.primary,
+h2.primary,
+h3.primary,
+h4.primary {
+  color: var(--color-primary);
+}
+
+h1.secondary,
+h2.secondary,
+h3.secondary,
+h4.secondary {
+  color: var(--color-secondary);
+}
+
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.75rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  h2 {
+    font-size: 1.875rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1.125rem;
   }
 }
