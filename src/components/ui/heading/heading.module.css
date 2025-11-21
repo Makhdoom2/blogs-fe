@@ -1,0 +1,14 @@
+.heading {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0.5rem 0;
+}
+
+.primary {
+  color: var(--color-primary);
+}
+
+.secondary {
+  color: var(--color-secondary);
+}

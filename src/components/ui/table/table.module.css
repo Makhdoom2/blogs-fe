@@ -1,0 +1,165 @@
+.tableContainer {
+  width: 100%;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tableHeader {
+  background: var(--color-primary);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.headerCell {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  user-select: none;
+  background: var(--color-primary);
+}
+
+.headerCell:hover {
+  background: var(--color-primary-dark);
+}
+
+.headerCell:hover {
+  color: white;
+  opacity: 1;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.sortContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 12px;
+  height: 16px;
+  position: relative;
+}
+
+.sortIcon {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.7rem;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+  line-height: 0.7;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.sortIcon.up {
+  top: -1px;
+}
+
+.sortIcon.down {
+  bottom: -1px;
+}
+
+.sortIcon.active {
+  opacity: 1;
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.sortIcon.inactive {
+  opacity: 0.4;
+}
+
+.tableBody {
+  background: var(--color-card);
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+  background: var(--color-card);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background: var(--color-background);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tableRow:nth-child(even) {
+  background: var(--color-card);
+}
+
+[data-theme="light"] .tableRow:nth-child(even) {
+  background: rgba(99, 102, 241, 0.03);
+}
+
+[data-theme="dark"] .tableRow:nth-child(even) {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.tableRow:nth-child(even):hover {
+  background: var(--color-background);
+}
+
+.tableCell {
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+}
+
+.emptyState {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.emptyStateIcon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.loadingState {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.loadingSpinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
