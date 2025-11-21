@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+  /* outline: 1px solid red !important; */
+}
+
+.main {
+  flex: 1;
+  padding: 2rem; /* more comfortable padding for mobile */
+}
+
+@media (min-width: 900px) {
+  .main {
+    padding: 3rem 4rem; /* larger padding for desktop */
+  }
+}
