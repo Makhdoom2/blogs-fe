@@ -1,0 +1,28 @@
+.dashboardWrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: var(--color-background);
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 240px; /* sidebar width for desktop */
+  transition: margin-left 0.3s ease;
+}
+
+.contentArea {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background: var(--color-background);
+}
+
+/* On mobile, main content fills full width */
+@media (max-width: 900px) {
+  .mainContent {
+    margin-left: 0;
+  }
+}

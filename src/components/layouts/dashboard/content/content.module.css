@@ -1,0 +1,35 @@
+.contentArea {
+  flex: 1;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  background: var(--color-background);
+  overflow-y: auto;
+}
+
+/* Individual Card Style */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.cardContent {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
