@@ -8,6 +8,7 @@ interface SelectProps {
   onChange: (value: string) => void;
   options: string[];
   placeholder?: string;
+  issmall?: boolean;
 }
 
 export default function Select({
@@ -15,6 +16,7 @@ export default function Select({
   onChange,
   options,
   placeholder,
+  issmall = false,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -64,8 +66,22 @@ export default function Select({
   };
 
   return (
-    <div className={styles.customSelect} ref={dropdownRef}>
+    <div
+      className={styles.customSelect}
+      ref={dropdownRef}
+      style={{
+        width: issmall ? "fit-content" : undefined,
+        maxWidth: "100%",
+      }}
+    >
       <div
+        style={{
+          width: issmall ? "fit-content" : undefined,
+          maxWidth: "100%",
+          fontSize: issmall ? "0.9rem" : undefined,
+          padding: issmall ? "6px 12px;" : undefined,
+          borderRadius: issmall ? "6px" : undefined,
+        }}
         className={styles.selectHeader}
         onClick={() => setIsOpen(!isOpen)}
         tabIndex={0}
@@ -75,11 +91,14 @@ export default function Select({
         aria-haspopup="listbox"
       >
         <span>{value || placeholder || "Select an option"}</span>
-        <span
-          className={`${styles.arrow} ${
-            isOpen ? styles.arrowUp : styles.arrowDown
-          }`}
-        ></span>
+
+        {!issmall && (
+          <span
+            className={`${styles.arrow} ${
+              isOpen ? styles.arrowUp : styles.arrowDown
+            }`}
+          ></span>
+        )}
       </div>
 
       {isOpen && (
