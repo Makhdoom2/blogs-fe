@@ -34,37 +34,38 @@ export interface UpdatePostDto {
   contentHTML: string;
   imageUrl?: string;
 }
-
+interface authorInfo {
+  _id: string;
+  name: string;
+  email: string;
+}
 export interface Post {
-  id: string;
+  _id: string;
   title: string;
   contentHTML: string;
+  author: authorInfo;
   imageUrl?: string;
   published: boolean;
-  authorId: string;
-  author: {
-    id: string;
-    name: string;
-    email: string;
-  };
   createdAt: string;
   updatedAt: string;
 }
 
 // user types
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   role: "user" | "admin";
-  isActive: boolean;
+  isBlocked: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface UpdateUserPermissionDto {
-  role: "user" | "admin";
-  isActive: boolean;
+export interface PaginatedUsers {
+  total: number;
+  page: number;
+  limit: number;
+  users: User[];
 }
 
 // common types
@@ -82,4 +83,12 @@ export interface PaginatedResponse<T> {
     total: number;
     totalPages: number;
   };
+}
+
+//posts
+export interface PaginatedPosts {
+  total: number;
+  page: number;
+  limit: number;
+  posts: Post[];
 }

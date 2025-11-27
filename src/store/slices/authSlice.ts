@@ -25,15 +25,16 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (
       state,
-      action: PayloadAction<{
-        token: string;
-        user: User;
-        expiresAt: number;
-      }>
+      action: PayloadAction<{ token: string; user: User; expiresAt: number }>
     ) => {
       state.token = action.payload.token;
       state.user = action.payload.user;
       state.expiresAt = action.payload.expiresAt;
+      // console.log("TESTING");
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("role", action.payload.user.role);
+      localStorage.setItem("expiresAt", action.payload.expiresAt.toString());
+      localStorage.setItem("userId", action.payload.user.id);
     },
 
     logout: (state) => {
@@ -42,9 +43,25 @@ const authSlice = createSlice({
       state.expiresAt = null;
       localStorage.removeItem("token");
       localStorage.removeItem("role");
+      localStorage.removeItem("expiresAt");
+      localStorage.removeItem("userId");
+    },
+
+    checkSession: (state) => {
+      const expiresAt = localStorage.getItem("expiresAt");
+      if (expiresAt && Number(expiresAt) * 1000 < Date.now()) {
+        // session expired
+        state.token = null;
+        state.user = null;
+        state.expiresAt = null;
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("expiresAt");
+      }
     },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, checkSession } = authSlice.actions;
 export default authSlice.reducer;

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { toastSuccess } from "@/utils/toast/toast";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/slices/authSlice";
-import { AuthResponse } from "../types";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
@@ -24,27 +23,20 @@ export const useAuth = () => {
 
   const loginMutation = useMutation({
     mutationFn: authService.login,
-
     onSuccess: (response: any) => {
-      console.log("Login response:", response);
       const { token, user, expiresAt } = response;
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", user.role);
+      //testing
+      // console.log("testing", user);
+      // const testExpiresAt = Math.floor(Date.now() / 1000) + 180;
+      // let expiresAt = testExpiresAt;
 
-      dispatch(
-        setCredentials({
-          token,
-          user,
-          expiresAt,
-        })
-      );
-
+      dispatch(setCredentials({ token, user, expiresAt }));
       toastSuccess("Login successful!");
 
       if (user.role === "admin") {
-        router.push("/admin/dashboard");
+        router.push("/admin/users");
       } else {
-        router.push("/test");
+        router.push("/home");
       }
     },
   });
