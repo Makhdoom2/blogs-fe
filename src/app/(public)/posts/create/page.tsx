@@ -1,4 +1,5 @@
 import CreatePostScreen from "@/components/views/post/postCreateEdit/PostCreate";
+import TokenProtectedRoute from "@/utils/protectedRoute/TokenProtectedRoute";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function CreatePost() {
-  return <CreatePostScreen />;
+  return (
+    <TokenProtectedRoute>
+      <CreatePostScreen />
+    </TokenProtectedRoute>
+  );
 }
