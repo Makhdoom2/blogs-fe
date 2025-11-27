@@ -10,17 +10,22 @@ import Input from "@/components/ui/Input/Input";
 import Button from "@/components/ui/button/Button";
 import styles from "@/components/common/form/form.module.css";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const Login: React.FC = () => {
   const router = useRouter();
 
+  const auth = useSelector((state: RootState) => state.auth);
+
+  // redirect logged in
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    if (token) {
-      role === "admin" ? router.push("/admin/dashboard") : router.push("/home");
+    if (auth.token) {
+      auth?.user?.role === "admin"
+        ? router.push("/admin/users")
+        : router.push("/home");
     }
-  }, [router]);
+  }, [auth.user, router]);
 
   const { login: loginMutation, isLoading } = useAuth();
 
@@ -70,10 +75,26 @@ const Login: React.FC = () => {
           )}
         </div>
 
-        <Button type="submit" variant="primary" isWidthFull>
+        <Button
+          type="submit"
+          variant="primary"
+          isWidthFull
+          disabled={isLoading}
+        >
           {isLoading ? "Logging in..." : "Login"}
         </Button>
       </form>
+
+      <div className={styles.extraOptions}>
+        <p>
+          Don't have an account?{" "}
+          <span onClick={() => router.push("/register")}>Create one</span>
+        </p>
+
+        <p className={styles.exploreMore}>
+          or <span onClick={() => router.push("/home")}>Explore More →</span>
+        </p>
+      </div>
     </>
   );
 };
