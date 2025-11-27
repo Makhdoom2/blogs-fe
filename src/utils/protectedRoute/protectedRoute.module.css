@@ -1,0 +1,38 @@
+.loaderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  background: var(--color-background);
+}
+
+.loader {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: linear-gradient(
+    270deg,
+    #8b5cf6,
+    #6366f1,
+    #22d3ee,
+    #14b8a6,
+    #8b5cf6
+  );
+  background-size: 1000% 1000%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
