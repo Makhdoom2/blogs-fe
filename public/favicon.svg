@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="auroraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="30%" stop-color="#6366f1"/>
+      <stop offset="70%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <style>
+      .mono {
+        font-family: 'Inter', sans-serif;
+        font-weight: 900;
+        font-size: 48px;
+        fill: url(#auroraGradient);
+        dominant-baseline: central;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="#0f172a"/>
+  <text x="32" y="34" class="mono">N</text>
+</svg>
