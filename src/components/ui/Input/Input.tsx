@@ -8,12 +8,12 @@ interface InputProps {
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   placeholder: string;
-  type?: "text" | "email" | "password" | "number";
+  type?: "text" | "email" | "password" | "number" | "file";
   register?: UseFormRegisterReturn;
 }
 
 export default function Input({
-  value,
+  // value,
   onChange,
   placeholder,
   type = "text",
@@ -23,7 +23,7 @@ export default function Input({
     <input
       className={styles.input}
       type={type}
-      value={value}
+      // value={value ?? ""}
       onChange={onChange}
       placeholder={placeholder}
       {...register}

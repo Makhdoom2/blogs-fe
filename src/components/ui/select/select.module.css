@@ -25,6 +25,7 @@
 
 .selectList {
   position: absolute;
+  width: 100%;
   top: 100%;
   left: 0;
   right: 0;

@@ -12,6 +12,11 @@
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
 }
 
+.editorWrapper:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-medium);
+}
+
 .editorContent {
   min-height: 200px;
   color: var(--color-text);
@@ -107,7 +112,9 @@
 
 .toolbar button:hover,
 .toolbar select:hover {
-  background: var(--color-border-hover, rgba(0, 0, 0, 0.05));
+  /* background: var(--color-border-hover, rgba(0, 0, 0, 0.05)); */
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-medium);
 }
 
 .toolbar select {
@@ -124,6 +131,75 @@
 
 .active {
   background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+/* PASTE HTML MODAL CSSS */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modalContent {
+  background-color: var(--color-card);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  width: 320px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modalTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-card);
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.modalButton {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.modalButton:hover {
+  opacity: 0.85;
+}
+
+.cancelButton {
+  background-color: var(--color-card);
+  color: var(--color-text);
+}
+
+.insertButton {
+  background-color: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
 }

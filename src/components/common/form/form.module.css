@@ -61,3 +61,28 @@
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
+
+.extraOptions {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.extraOptions span {
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.extraOptions span:hover {
+  text-decoration: underline;
+}
+
+.exploreMore span {
+  color: var(--color-secondary);
+}

@@ -78,8 +78,9 @@ export default function Select({
         style={{
           width: issmall ? "fit-content" : undefined,
           maxWidth: "100%",
+          height: issmall ? "32px" : undefined,
           fontSize: issmall ? "0.9rem" : undefined,
-          padding: issmall ? "6px 12px;" : undefined,
+          padding: issmall ? "6px 12px" : undefined,
           borderRadius: issmall ? "6px" : undefined,
         }}
         className={styles.selectHeader}
@@ -92,13 +93,14 @@ export default function Select({
       >
         <span>{value || placeholder || "Select an option"}</span>
 
-        {!issmall && (
-          <span
-            className={`${styles.arrow} ${
-              isOpen ? styles.arrowUp : styles.arrowDown
-            }`}
-          ></span>
-        )}
+        {/* {!issmall && ( */}
+        <span
+          className={`${styles.arrow} ${
+            isOpen ? styles.arrowUp : styles.arrowDown
+          }`}
+          style={{ marginLeft: issmall ? "10px" : undefined }}
+        ></span>
+        {/* )} */}
       </div>
 
       {isOpen && (

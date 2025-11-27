@@ -32,7 +32,7 @@ const Table = <T,>({
   }>({ key: "", direction: null });
 
   const sortedData = useMemo(() => {
-    if (!sortConfig.key || !sortConfig.direction) return data;
+    if (!sortConfig.key || !sortConfig.direction || loading) return data;
 
     return [...data].sort((a, b) => {
       const aValue = a[sortConfig.key as keyof T];
@@ -56,103 +56,73 @@ const Table = <T,>({
 
       return 0;
     });
-  }, [data, sortConfig]);
+  }, [data, sortConfig, loading]);
 
   const handleSort = (key: string, sortable?: boolean) => {
-    if (!sortable) return;
+    if (!sortable || loading) return;
 
     setSortConfig((current) => {
-      if (current.key !== key) {
-        return { key, direction: "asc" };
-      }
-
-      if (current.direction === "asc") {
-        return { key, direction: "desc" };
-      }
-
+      if (current.key !== key) return { key, direction: "asc" };
+      if (current.direction === "asc") return { key, direction: "desc" };
       return { key: "", direction: null };
     });
   };
 
-  if (loading) {
-    return (
-      <div className={`${styles.tableContainer} ${className}`}>
-        <div className={styles.loadingState}>
-          <div className={styles.loadingSpinner} />
-          Loading data...
-        </div>
-      </div>
-    );
-  }
-
-  if (!data.length) {
-    return (
-      <div className={`${styles.tableContainer} ${className}`}>
-        <div className={styles.emptyState}>
-          <div className={styles.emptyStateIcon}>📊</div>
-          {emptyMessage}
-        </div>
-      </div>
-    );
-  }
+  const skeletonRows = Array.from({ length: 8 }); // 8 skeleton rows
 
   return (
-    <div className={`${styles.tableContainer} ${className}`}>
-      <table className={styles.table}>
-        <thead className={styles.tableHeader}>
-          <tr>
-            {columns.map((column) => (
-              <th
-                key={column.key}
-                className={styles.headerCell}
-                onClick={() => handleSort(column.key, column.sortable)}
-                style={{ width: column.width }}
-              >
-                <div className={styles.headerContent}>
-                  <span>{column.header}</span>
-                  {column.sortable && (
-                    <div className={styles.sortContainer}>
-                      <span
-                        className={`${styles.sortIcon} ${styles.up} ${
-                          sortConfig.key === column.key &&
-                          sortConfig.direction === "asc"
-                            ? styles.active
-                            : styles.inactive
-                        }`}
-                      >
-                        ↑
-                      </span>
-                      <span
-                        className={`${styles.sortIcon} ${styles.down} ${
-                          sortConfig.key === column.key &&
-                          sortConfig.direction === "desc"
-                            ? styles.active
-                            : styles.inactive
-                        }`}
-                      >
-                        ↓
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className={styles.tableBody}>
-          {sortedData.map((row, index) => (
-            <tr key={index} className={styles.tableRow}>
+    <div className={`${styles.tableWrapper}`}>
+      <div className={`${styles.tableContainer} ${className}`}>
+        <table className={styles.table}>
+          <thead className={styles.tableHeader}>
+            <tr>
               {columns.map((column) => (
-                <td key={column.key} className={styles.tableCell}>
-                  {column.render
-                    ? column.render(row[column.key as keyof T], row)
-                    : String(row[column.key as keyof T] || "")}
-                </td>
+                <th
+                  key={column.key}
+                  className={styles.headerCell}
+                  onClick={() => handleSort(column.key, column.sortable)}
+                >
+                  <div className={styles.headerContent}>
+                    <span>{column.header}</span>
+                  </div>
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className={styles.tableBody}>
+            {loading ? (
+              skeletonRows.map((_, i) => (
+                <tr key={i} className={styles.tableRow}>
+                  {columns.map((col) => (
+                    <td key={col.key} className={styles.tableCell}>
+                      <div className={styles.skeleton} />
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : sortedData.length > 0 ? (
+              sortedData.map((row, i) => (
+                <tr key={i} className={styles.tableRow}>
+                  {columns.map((col) => (
+                    <td key={col.key} className={styles.tableCell}>
+                      {col.render
+                        ? col.render(row[col.key as keyof T], row)
+                        : String(row[col.key as keyof T] ?? "")}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={columns.length} className={styles.emptyState}>
+                  {emptyMessage}
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

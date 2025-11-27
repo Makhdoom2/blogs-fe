@@ -10,6 +10,7 @@ interface ButtonProps {
   size?: "sm" | "md" | "lg";
   isWidthFull?: boolean;
   isCenter?: boolean;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -20,6 +21,7 @@ export default function Button({
   size = "md",
   isWidthFull = false,
   isCenter = false,
+  disabled = false,
 }: ButtonProps) {
   return (
     <button
@@ -29,9 +31,11 @@ export default function Button({
         ${styles[size]}
         ${isWidthFull ? styles.fullWidth : ""}
         ${isCenter ? styles.center : ""}
+        ${disabled ? styles.disabled : ""}
       `}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </button>

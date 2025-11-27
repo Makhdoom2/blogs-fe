@@ -35,6 +35,10 @@ export default function RichTextEditor({
   content,
   setContent,
 }: RichTextEditorProps) {
+  //   const CustomListItem = ListItem.extend({
+  //     content: "inline*",
+  //   });
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -52,26 +56,55 @@ export default function RichTextEditor({
       Heading,
       Strike,
       Highlight,
+      //   CustomListItem,
     ],
 
     content: content || "<p></p>",
+
     onUpdate({ editor }) {
       setContent(editor.getHTML());
     },
+
     editorProps: {
       attributes: {
         class: styles.editorContent,
       },
+
+      handlePaste(view, event) {
+        const html = event.clipboardData?.getData("text/html");
+        const text = event.clipboardData?.getData("text/plain");
+        if (!editor) return false;
+
+        if (html && html !== text) {
+          event.preventDefault();
+          editor.commands.setContent(html);
+          return true;
+        }
+
+        return false;
+      },
     },
+
     immediatelyRender: false,
   });
 
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [currentHeading, setCurrentHeading] = useState("");
 
+  const [showHtmlModal, setShowHtmlModal] = useState(false);
+  const [rawHtml, setRawHtml] = useState("");
+
   useEffect(() => {
     return () => editor?.destroy();
   }, [editor]);
+
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
+
+  if (!editor) return <div>Loading editor...</div>;
 
   if (!editor)
     return <div className={styles.editorWrapper}>Loading editor...</div>;
@@ -79,69 +112,7 @@ export default function RichTextEditor({
   return (
     <div className={styles.editorWrapper}>
       {/* toolbar */}
-      {/* <div className={styles.toolbar}>
-        <button
-          type="button"
-          className={`${styles.toolbarButton} ${
-            editor.isActive("bold") ? styles.activeButton : ""
-          }`}
-          onClick={() => editor.chain().focus().toggleBold().run()}
-        >
-          Bold
-        </button>
 
-        <button
-          type="button"
-          className={`${styles.toolbarButton} ${
-            editor.isActive("italic") ? styles.activeButton : ""
-          }`}
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-        >
-          Italic
-        </button>
-
-        <button
-          type="button"
-          className={`${styles.toolbarButton} ${
-            editor.isActive("strike") ? styles.activeButton : ""
-          }`}
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-        >
-          Strike
-        </button>
-
-        <button
-          type="button"
-          className={`${styles.toolbarButton} ${
-            editor.isActive("heading", { level: 2 }) ? styles.activeButton : ""
-          }`}
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-        >
-          H2
-        </button>
-
-        <button
-          type="button"
-          className={`${styles.toolbarButton} ${
-            editor.isActive("bulletList") ? styles.activeButton : ""
-          }`}
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-        >
-          UL
-        </button>
-
-        <button
-          type="button"
-          className={`${styles.toolbarButton} ${
-            editor.isActive("orderedList") ? styles.activeButton : ""
-          }`}
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        >
-          OL
-        </button>
-      </div> */}
       <div className={styles.toolbar}>
         {/* TEXT FORMATTING */}
         <button
@@ -178,6 +149,12 @@ export default function RichTextEditor({
           onClick={() => editor.chain().focus().toggleCode().run()}
         >
           Code
+        </button>
+
+        {/* RAW HTML PASTE */}
+
+        <button type="button" onClick={() => setShowHtmlModal(true)}>
+          Paste HTML
         </button>
 
         {/* HEADINGS */}
@@ -295,6 +272,46 @@ export default function RichTextEditor({
           setImageModalOpen(false);
         }}
       />
+
+      {showHtmlModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3 className={styles.modalTitle}>Paste Raw HTML</h3>
+
+            <textarea
+              className={styles.modalInput}
+              rows={8}
+              value={rawHtml}
+              onChange={(e) => setRawHtml(e.target.value)}
+              placeholder="<p><strong>Hello</strong> world</p>"
+            />
+
+            <div className={styles.modalButtons}>
+              <button
+                className={`${styles.modalButton} ${styles.cancelButton}`}
+                onClick={() => setShowHtmlModal(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className={`${styles.modalButton} ${styles.insertButton}`}
+                onClick={() => {
+                  const cleanHtml = rawHtml.trim();
+                  if (cleanHtml.length > 0) {
+                    editor.chain().focus().insertContent(cleanHtml).run();
+                  }
+                  setRawHtml("");
+                  setShowHtmlModal(false);
+                }}
+              >
+                Insert
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Editor Content */}
       <EditorContent editor={editor} />
     </div>
