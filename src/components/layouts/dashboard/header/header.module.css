@@ -24,14 +24,14 @@
   gap: 1rem;
 }
 
-.profile {
+/* .profile {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   background: var(--aurora-gradient);
   box-shadow: 0 0 15px var(--color-primary-glow);
   cursor: pointer;
-}
+} */
 
 /* Hamburger menu only on mobile */
 .hamburger {

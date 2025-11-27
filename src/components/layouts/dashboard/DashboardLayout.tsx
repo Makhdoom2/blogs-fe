@@ -8,7 +8,6 @@ import Content from "./content/Content";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Close sidebar automatically when resizing to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 900 && sidebarOpen) {
@@ -25,11 +24,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles.dashboardWrapper}>
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+
       <div className={styles.mainContent}>
         <Header toggleSidebar={toggleSidebar} />
-        <div className={styles.contentArea}>
-          <Content>{children}</Content>
-        </div>
+
+        <Content>{children}</Content>
       </div>
     </div>
   );
