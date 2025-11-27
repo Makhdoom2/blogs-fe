@@ -9,18 +9,21 @@ export default function CTASection() {
   };
 
   return (
-    <section className={styles.ctaSection}>
-      <div className={styles.container}>
-        <h2 className={styles.heading}>
-          Join the <span>Community Today</span>
-        </h2>
-        <p className={styles.subHeading}>
-          Start reading amazing content or publish your own stories with ease.
-        </p>
-        <button className="btn-primary" onClick={handleSignup}>
-          Sign Up Now
-        </button>
-      </div>
-    </section>
+    <>
+      <span id="community" />
+      <section className={styles.ctaSection}>
+        <div className={styles.container}>
+          <h2 className={styles.heading}>
+            Join the <span>Community Today</span>
+          </h2>
+          <p className={styles.subHeading}>
+            Start reading amazing content or publish your own stories with ease.
+          </p>
+          <button className="btn-primary" onClick={handleSignup}>
+            Sign Up Now
+          </button>
+        </div>
+      </section>
+    </>
   );
 }

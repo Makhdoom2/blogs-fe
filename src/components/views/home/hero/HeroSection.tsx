@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
 import styles from "./hero.module.css";
 import { useRouter } from "next/navigation";
+import { RootState } from "@/store";
+import { useSelector } from "react-redux";
 
 export default function HeroSection() {
-  const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  }, []);
+
+  const token = useSelector((state: RootState) => state?.auth?.token);
 
   const handleRead = () => {
     router.push("/posts");
   };
 
   const handlePublish = () => {
-    router.push("/post/create");
+    router.push("/posts/create");
   };
 
   const handleLogin = () => {

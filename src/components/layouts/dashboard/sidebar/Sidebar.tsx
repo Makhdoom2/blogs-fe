@@ -1,6 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./sidebar.module.css";
+import { menuItems } from "./navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store"; // adjust path
+import { logout } from "@/store/slices/authSlice";
+import { FiLogOut } from "react-icons/fi";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -9,8 +16,11 @@ type SidebarProps = {
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  // Detect if current screen is mobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 900);
     handleResize();
@@ -18,9 +28,15 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+    if (isMobile) onClose();
+  };
+
   return (
     <>
-      {/* Overlay only visible on mobile */}
+      {/* overlay only visible on mobile */}
       {isMobile && (
         <div
           className={`${styles.overlay} ${isOpen ? styles.visible : ""}`}
@@ -36,10 +52,27 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         <div className={styles.logo}>Notena</div>
 
         <nav className={styles.menu}>
-          <div className={`${styles.menuItem} active`}>Dashboard</div>
-          <div className={styles.menuItem}>Analytics</div>
-          <div className={styles.menuItem}>Users</div>
-          <div className={styles.menuItem}>Settings</div>
+          {menuItems.map((item) => (
+            <Link key={item.path} href={item.path}>
+              <div
+                className={`${styles.menuItem} ${
+                  pathname === item.path ? styles.active : ""
+                }`}
+              >
+                {item.label}
+              </div>
+            </Link>
+          ))}
+
+          {/*user Info + logout  */}
+          {user && (
+            <div className={styles.userSection}>
+              <button className={styles.logoutButton} onClick={handleLogout}>
+                <FiLogOut style={{ marginRight: "0.5rem" }} />
+                Logout
+              </button>
+            </div>
+          )}
         </nav>
       </aside>
     </>

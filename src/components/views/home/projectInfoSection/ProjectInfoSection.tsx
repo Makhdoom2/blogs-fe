@@ -2,7 +2,7 @@ import styles from "./projectInfo.module.css";
 
 export default function ProjectInfoSection() {
   return (
-    <section className={styles.projectInfoSection}>
+    <section id="about" className={styles.projectInfoSection}>
       <div className={styles.container}>
         <h2 className={styles.heading}>
           About This <span className="text-gradient">Demo Project</span>

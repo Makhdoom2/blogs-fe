@@ -9,8 +9,10 @@ import Input from "@/components/ui/Input/Input";
 import Button from "@/components/ui/button/Button";
 import styles from "@/components/common/form/form.module.css";
 import { RegisterDto } from "@/api/types";
+import { useRouter } from "next/navigation";
 
 const Register: React.FC = () => {
+  const router = useRouter();
   const { register: registerMutation, isLoading } = useAuth();
 
   const {
@@ -79,10 +81,26 @@ const Register: React.FC = () => {
           )}
         </div>
 
-        <Button type="submit" variant="primary" isWidthFull>
+        <Button
+          type="submit"
+          variant="primary"
+          isWidthFull
+          disabled={isLoading}
+        >
           {isLoading ? "Registering..." : "Register"}
         </Button>
       </form>
+
+      <div className={styles.extraOptions}>
+        <p>
+          Already have an account?{" "}
+          <span onClick={() => router.push("/login")}>Login</span>
+        </p>
+
+        <p className={styles.exploreMore}>
+          or <span onClick={() => router.push("/home")}>Explore more →</span>
+        </p>
+      </div>
     </>
   );
 };
