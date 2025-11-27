@@ -8,42 +8,40 @@ import styles from "./footer.module.css";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      {/* Notena Accent */}
       <div className={styles.accent}></div>
 
-      {/* Social Icons */}
       <div className={styles.socialRow}>
         <FaGithub
           className={styles.icon}
-          onClick={() => window.open("https://github.com/", "_blank")}
+          onClick={() => window.open("https://github.com/Makhdoom2", "_blank")}
         />
         <FaLinkedin
           className={styles.icon}
-          onClick={() => window.open("https://www.linkedin.com", "_blank")}
+          onClick={() =>
+            window.open("https://www.linkedin.com/in/makhdoom-umbel/", "_blank")
+          }
         />
       </div>
 
-      {/* Contact Actions */}
       <div className={styles.contactRow}>
-        {/* WhatsApp */}
         <div
           className={styles.contactItem}
-          onClick={() => window.open("https://wa.me/923000000000", "_blank")}
+          onClick={() => window.open("https://wa.me/923165679686", "_blank")}
         >
-          <MdPhone style={{ marginRight: 6 }} />
-          +92 300 0000000
+          <MdPhone />
+          <span>+92 316 5679686</span>
         </div>
 
-        {/* Email */}
         <div
           className={styles.contactItem}
-          onClick={() => (window.location.href = "mailto:example@email.com")}
+          onClick={() =>
+            (window.location.href = "mailto:makhdoommuhammad1@gmail.com")
+          }
         >
-          <MdEmail style={{ marginRight: 6 }} />
-          example@email.com
+          <MdEmail />
+          <span>makhdoommuhammad1@gmail.com</span>
         </div>
 
-        {/* Google Maps */}
         <div
           className={styles.contactItem}
           onClick={() =>
@@ -53,14 +51,13 @@ const Footer = () => {
             )
           }
         >
-          <MdLocationOn style={{ marginRight: 6 }} />
-          Islamabad, Pakistan
+          <MdLocationOn />
+          <span>Islamabad, Pakistan</span>
         </div>
       </div>
 
-      {/* Copyright */}
       <div className={styles.copy}>
-        © {new Date().getFullYear()} Notena. All Rights Reserved.
+        © {new Date().getFullYear()} Notena — All Rights Reserved.
       </div>
     </footer>
   );

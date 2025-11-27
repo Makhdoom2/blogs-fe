@@ -1,23 +1,31 @@
+"use client";
+
 import { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import styles from "./blogSlider.module.css";
+import { usePosts } from "@/api/hooks/usePosts";
+import { Post } from "@/api/types";
+import { useRouter } from "next/navigation";
 
-interface BlogPost {
-  _id: string;
-  title: string;
-  imageUrl?: string;
-  authorName: string;
-}
+const SkeletonCard = () => (
+  <div className={styles.card + " " + styles.skeleton}>
+    <div className={styles.skeletonImage}></div>
+    <div className={styles.skeletonTitle}></div>
+    <div className={styles.skeletonAuthor}></div>
+  </div>
+);
 
-interface BlogSliderProps {
-  posts: BlogPost[];
-}
+const BlogSlider: FC = () => {
+  const { useGetPosts } = usePosts();
 
-const BlogSlider: FC<BlogSliderProps> = ({ posts }) => {
-  if (posts.length === 0) return null;
+  const router = useRouter();
+
+  const { data, isLoading } = useGetPosts(1, 10, "");
+
+  const posts: Post[] = data?.posts || [];
 
   return (
     <section className={styles.blogSliderSection}>
@@ -39,22 +47,31 @@ const BlogSlider: FC<BlogSliderProps> = ({ posts }) => {
           1024: { slidesPerView: 3 },
         }}
       >
-        {posts.map((post) => (
-          <SwiperSlide key={post._id}>
-            <div className={styles.card}>
-              <img
-                src={
-                  post.imageUrl ||
-                  "https://via.placeholder.com/400x200?text=No+Image"
-                }
-                alt={post.title}
-                className={styles.image}
-              />
-              <h3 className={styles.title}>{post.title}</h3>
-              <p className={styles.author}>By {post.authorName}</p>
-            </div>
-          </SwiperSlide>
-        ))}
+        {isLoading
+          ? Array.from({ length: 3 }).map((_, idx) => (
+              <SwiperSlide key={idx}>
+                <SkeletonCard />
+              </SwiperSlide>
+            ))
+          : posts.map((post) => (
+              <SwiperSlide key={post._id}>
+                <div
+                  className={styles.card}
+                  onClick={() => router.push(`/posts/${post._id}`)}
+                >
+                  <img
+                    src={
+                      post.imageUrl ||
+                      "https://via.placeholder.com/400x200?text=No+Image"
+                    }
+                    alt={post.title}
+                    className={styles.image}
+                  />
+                  <h3 className={styles.title}>{post.title}</h3>
+                  <p className={styles.author}>By {post.author.name}</p>
+                </div>
+              </SwiperSlide>
+            ))}
       </Swiper>
     </section>
   );

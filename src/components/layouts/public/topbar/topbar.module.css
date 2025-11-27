@@ -173,3 +173,12 @@
 body {
   overflow-x: hidden;
 }
+
+.nav a.activeLink,
+.mobileNav a.activeLink {
+  color: var(--color-primary);
+}
+
+.nav a.activeLink::after {
+  width: 100%;
+}
