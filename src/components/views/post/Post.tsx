@@ -92,7 +92,7 @@ export default function PostsPage() {
       </button>
 
       <div className={styles.container}>
-        <h1 className={styles.heading}>All Blog Posts</h1>
+        <h1 className={styles.heading}>All Blogs</h1>
 
         <div className={styles.topControls}>
           <input

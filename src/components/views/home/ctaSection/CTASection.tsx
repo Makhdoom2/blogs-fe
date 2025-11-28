@@ -10,8 +10,7 @@ export default function CTASection() {
 
   return (
     <>
-      <span id="community" />
-      <section className={styles.ctaSection}>
+      <section id="community" className={styles.ctaSection}>
         <div className={styles.container}>
           <h2 className={styles.heading}>
             Join the <span>Community Today</span>

@@ -1,6 +1,7 @@
 .aboutSection {
   width: 100%;
-  padding: 4rem 2rem;
+  /* padding: 4rem 2rem; */
+  /* border: 1px solid red; */
   background: var(--color-background);
   color: var(--color-text);
 }
@@ -56,7 +57,7 @@
   line-height: 1.5;
 }
 
-/* Responsive */
+/* responsive */
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);

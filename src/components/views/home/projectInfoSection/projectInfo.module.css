@@ -1,6 +1,7 @@
 .projectInfoSection {
   width: 100%;
-  padding: 4rem 2rem;
+  /* padding: 4rem 2rem; */
+  /* border: 1px solid red; */
   background: var(--color-background);
   color: var(--color-text);
 }
@@ -64,7 +65,7 @@
   font-style: italic;
 }
 
-/* Responsive */
+/* responsive */
 @media (min-width: 768px) {
   .heading {
     font-size: 3rem;

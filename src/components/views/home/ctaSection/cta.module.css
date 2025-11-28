@@ -1,6 +1,7 @@
 .ctaSection {
   width: 100%;
   padding: 6rem 2rem;
+  /* border: 1px solid red; */
   background: var(--aurora-gradient);
   color: var(--color-btn-text);
   display: flex;
@@ -8,7 +9,7 @@
   align-items: center;
   text-align: center;
   border-radius: var(--radius-lg);
-  margin: 4rem 0;
+  /* margin: 4rem 0; */
 }
 
 .container {
@@ -39,7 +40,7 @@ button.btn-primary:hover {
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
 }
 
-/* Responsive */
+/* responsive */
 @media (max-width: 768px) {
   .heading {
     font-size: 2.2rem;

@@ -11,7 +11,7 @@ import { Post } from "@/api/types";
 import { useRouter } from "next/navigation";
 
 const SkeletonCard = () => (
-  <div className={styles.card + " " + styles.skeleton}>
+  <div className={`${styles.card} ${styles.skeleton}`}>
     <div className={styles.skeletonImage}></div>
     <div className={styles.skeletonTitle}></div>
     <div className={styles.skeletonAuthor}></div>
@@ -39,6 +39,7 @@ const BlogSlider: FC = () => {
         slidesPerView={1}
         navigation
         loop={true}
+        // navigation={window.innerWidth > 768 ? true : false}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         grabCursor={true}
         breakpoints={{

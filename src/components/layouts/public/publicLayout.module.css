@@ -9,11 +9,16 @@
 
 .main {
   flex: 1;
-  padding: 2rem; /* more comfortable padding for mobile */
+  padding: 1.75rem;
 }
 
+@media (min-width: 768px) {
+  .main {
+    padding: 2.5rem;
+  }
+}
 @media (min-width: 900px) {
   .main {
-    padding: 3rem 4rem; /* larger padding for desktop */
+    padding: 3rem 4rem;
   }
 }
