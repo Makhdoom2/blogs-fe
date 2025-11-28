@@ -103,11 +103,11 @@ The application is structured with the following routes, categorized by their pu
 - **`/posts`** – View all posts.  
 - **`/posts/[id]`** – View a single blog post.  
 
-### ✍️ User Routes
+###  User Routes
 - **`/posts/create`** – Create a new blog post.  
 - **`/posts/edit/[id]`** – Edit an existing blog post.  
 
-### 🔑 Auth Routes
+###  Auth Routes
 - **`/login`** – User login page.  
 - **`/register`** – User registration page.  
 
