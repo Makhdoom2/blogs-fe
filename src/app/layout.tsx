@@ -20,6 +20,29 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg?v=2",
   },
+
+  openGraph: {
+    title: "Notena",
+    description: "Demo Blog management system",
+    url: "https://blogs-fe.vercel.app/home",
+    siteName: "Notena",
+    images: [
+      {
+        url: "/cover.svg",
+        width: 1200,
+        height: 630,
+        alt: "Notena Cover",
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Notena",
+    description: "Blog management system",
+    images: ["/cover.svg"],
+  },
 };
 
 export default function RootLayout({
