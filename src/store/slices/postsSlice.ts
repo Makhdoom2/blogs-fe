@@ -12,7 +12,7 @@ interface PostsState {
 const initialState: PostsState = {
   posts: [],
   page: 1,
-  limit: 9,
+  limit: 12,
   total: 0,
   search: "",
 };
