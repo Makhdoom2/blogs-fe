@@ -1,5 +1,5 @@
 <p align="center">
-  <h2 align="center">Blogs Frontend — Next.js React Application</h2>
+  <h2 align="center">Blogs Frontend — Next.js React Application (DEMO PROJECT)</h2>
 </p>
 
 <p align="center">
